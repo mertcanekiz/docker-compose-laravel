@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "3306:3306"
+      - "4306:3306"
     environment:
       MYSQL_DATABASE: homestead
       MYSQL_USER: homestead
@@ -35,6 +35,8 @@ services:
       SERVICE_NAME: mysql
     networks:
       - laravel
+    volumes:
+      - ./db:/var/lib/mysql
 
   php:
     build:
@@ -81,7 +83,6 @@ services:
     depends_on:
       - mysql
     working_dir: /var/www/html
-    user: laravel
     entrypoint: ['php', '/var/www/html/artisan']
     networks:
       - laravel
